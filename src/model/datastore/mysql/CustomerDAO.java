@@ -19,7 +19,7 @@ import model.ICustomerDAO;
  */
 public class CustomerDAO implements ICustomerDAO {
 
-    protected final static boolean DEBUG = true;
+    protected final static boolean DEBUG = false;
 
     @Override
     public void createCustomer(Customer customer) {

@@ -41,9 +41,11 @@ public class CustomerApp {
 
             switch (choice) {
                 case "1":
+                    System.out.println("\n");
                     System.out.println(cstList.toString());
                     break;
                 case "2":
+                    System.out.println("\n");
                     id = Validator.getInt(sc, "New Customer ID: ");
                     firstName = Validator.getLine(sc, "New Customer First Name: ");
                     lastName = Validator.getLine(sc, "New Customer Last Name: ");
@@ -54,10 +56,12 @@ public class CustomerApp {
                     cstList.createCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
                     break;
                 case "3":
+                    System.out.println("\n");
                     id = Validator.getInt(sc, "Customer ID to Retrieve: ");
                     System.out.println(cstList.retrieveCustomerById(id));
                     break;
                 case "4":
+                    System.out.println("\n");
                     id = Validator.getInt(sc, "Customer ID to Update: ");
                     firstName = Validator.getLine(sc, "Customer First Name: ");
                     lastName = Validator.getLine(sc, "Customer Last Name: ");
@@ -68,6 +72,7 @@ public class CustomerApp {
                     cstList.updateCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
                     break;
                 case "5":
+                    System.out.println("\n");
                     id = Validator.getInt(sc, "Customer ID to Delete: ");
                     System.out.println(cstList.retrieveCustomerById(id));
                     String ok = Validator.getLine(sc, "Delete this Customer? (y/n): ", "^[yYnN]$");
