@@ -161,6 +161,15 @@ public class CustomerDAO implements ICustomerDAO {
             System.out.println("deleteRecord SQLException: " + ex.getMessage());
         }
     }
+    
+    @Override
+    public List<Customer> getAgeGroup(int minAge,int maxAge) {
+        List<Customer> sorted = new ArrayList<>();
+        for(Customer c : retrieveAllCustomers()){
+            //SORT BY MIN-MAX AGE THEN ADD TO FINAL LIST
+        }
+        return sorted;
+    }
 
     @Override
     public String toString() {

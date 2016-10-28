@@ -168,4 +168,9 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return sb.toString();
     }
+
+    @Override
+    public List getAgeGroup(int minAge, int maxAge) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
