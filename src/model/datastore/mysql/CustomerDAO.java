@@ -170,6 +170,16 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return sorted;
     }
+    
+    @Override
+    public double showTotalProfits() {
+        List<Customer> mylist = new ArrayList<>();
+        double totalProfit = 0;
+        for(Customer customer : retrieveAllCustomers()){
+            totalProfit = totalProfit + customer.getPrice();
+        }
+        return totalProfit;
+    }
 
     @Override
     public String toString() {

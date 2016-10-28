@@ -27,6 +27,8 @@ public interface ICustomerDAO {
     void deleteCustomer(Customer customer);
     
     List getAgeGroup(int minAge,int maxAge);
+    
+    double showTotalProfits();
 
     @Override
     String toString();
