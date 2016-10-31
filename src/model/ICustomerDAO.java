@@ -30,6 +30,8 @@ public interface ICustomerDAO {
     
     double showTotalProfits();
 
+    String customerAgeRange();
+    
     @Override
     String toString();
 }

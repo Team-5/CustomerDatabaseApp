@@ -180,6 +180,24 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return totalProfit;
     }
+    
+    @Override
+    public String customerAgeRange(){
+        final String QUERY = "select avg(age), max(age), age(min) from customer";
+        int avgAge = 0, maxAge = 0, minAge = 0;
+        String display = "";
+        try (Connection con = DBConnection.getConnection();
+                PreparedStatement stmt = con.prepareStatement(QUERY)) {
+            ResultSet rs = stmt.executeQuery(QUERY);
+            avgAge = rs.getInt("avg(age)");
+            maxAge = rs.getInt("max(age)");
+            minAge = rs.getInt("min(age)");
+            display = "Average Age: " + avgAge + "Highest Age: " + maxAge + "Lowest Age: " + minAge;
+        } catch (SQLException ex) {
+            System.out.println("customerAgeRange SQLException: " + ex.getMessage());
+        }
+        return display;
+    }
 
     @Override
     public String toString() {

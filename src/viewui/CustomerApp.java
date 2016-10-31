@@ -38,7 +38,8 @@ public class CustomerApp {
             System.out.println("4 = Update Customer");
             System.out.println("5 = Delete Customer");
             System.out.println("6 = Show Total Profits");
-            choice = Validator.getLine(sc, "Number of choice: ", "^[0-6]$");
+            System.out.println("7 = Show Age Range");
+            choice = Validator.getLine(sc, "Number of choice: ", "^[0-7]$");
 
             switch (choice) {
                 case "1":
@@ -84,6 +85,10 @@ public class CustomerApp {
                 case "6":
                     System.out.println("\n");
                     System.out.println("Total profit of all purchases: $" + cstList.showTotalProfits());
+                    break;
+                case "7":
+                    System.out.println("\n");
+                    System.out.println(cstList.customerAgeRange());
                     break;
             }
         }
