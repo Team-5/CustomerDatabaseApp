@@ -14,7 +14,7 @@ import model.ICustomerDAO;
  * store. This version uses a MySQL database to store the data. It is multi-user
  * safe.
  *
- * @author Willie Scott, Jeremy Wiles, and Jason Whiting
+ * @author Willie Scott, Jeremy Wiles, Jason Whiting, and Lisa Caswell
  * @version 2016-10-20
  */
 public class CustomerDAO implements ICustomerDAO {
@@ -161,38 +161,40 @@ public class CustomerDAO implements ICustomerDAO {
             System.out.println("deleteRecord SQLException: " + ex.getMessage());
         }
     }
-    
+
     @Override
-    public List<Customer> getAgeGroup(int minAge,int maxAge) {
+    public List<Customer> getAgeGroup(int minAge, int maxAge) {
         List<Customer> sorted = new ArrayList<>();
-        for(Customer c : retrieveAllCustomers()){
+        for (Customer c : retrieveAllCustomers()) {
             //SORT BY MIN-MAX AGE THEN ADD TO FINAL LIST
         }
         return sorted;
     }
-    
+
     @Override
     public double showTotalProfits() {
         List<Customer> mylist = new ArrayList<>();
         double totalProfit = 0;
-        for(Customer customer : retrieveAllCustomers()){
+        for (Customer customer : retrieveAllCustomers()) {
             totalProfit = totalProfit + customer.getPrice();
         }
         return totalProfit;
     }
-    
+
     @Override
-    public String customerAgeRange(){
-        final String QUERY = "select avg(age), max(age), age(min) from customer";
+    public String customerAgeRange() {
+        final String QUERY = "select avg(age), max(age), min(age) from customer";
         int avgAge = 0, maxAge = 0, minAge = 0;
         String display = "";
         try (Connection con = DBConnection.getConnection();
                 PreparedStatement stmt = con.prepareStatement(QUERY)) {
             ResultSet rs = stmt.executeQuery(QUERY);
-            avgAge = rs.getInt("avg(age)");
-            maxAge = rs.getInt("max(age)");
-            minAge = rs.getInt("min(age)");
-            display = "Average Age: " + avgAge + "Highest Age: " + maxAge + "Lowest Age: " + minAge;
+            while (rs.next()) {
+                avgAge = rs.getInt("avg(age)");
+                maxAge = rs.getInt("max(age)");
+                minAge = rs.getInt("min(age)");
+            }
+            display = " Average Age: " + avgAge + "  Highest Age: " + maxAge + "  Lowest Age: " + minAge;
         } catch (SQLException ex) {
             System.out.println("customerAgeRange SQLException: " + ex.getMessage());
         }
