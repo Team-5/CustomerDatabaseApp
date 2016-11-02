@@ -20,6 +20,9 @@ public class Customer {
     private String purchase;
     private double price;
 
+    /**
+     * The empty constructor. Sets all variabels to the empty set or 0.
+     */
     public Customer() {
         id = 0;
         firstName = "";
@@ -30,6 +33,18 @@ public class Customer {
         price = 0;
     }
 
+    /**
+     * constructor that sets all variables equal to the customer object that is
+     * passed in.
+     * 
+     * @param id
+     * @param firstName
+     * @param lastName
+     * @param age
+     * @param state
+     * @param purchase
+     * @param price 
+     */
     public Customer(int id, String firstName, String lastName, int age, String state, String purchase, double price) {
         this.id = id;
         this.firstName = firstName;
@@ -40,58 +55,128 @@ public class Customer {
         this.price = price;
     }
 
+    /**
+     * Allows the user to retrieve the ID of a customer object.
+     * 
+     * @return 
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Allows the user to set the ID of a customer object.
+     * 
+     * @param id 
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Allows the user to retrieve the first name of a customer object.
+     * 
+     * @return 
+     */
     public String getFirstName() {
         return firstName;
     }
 
+    /**
+     * Allows the user to set the first name of a customer object.
+     * 
+     * @param id 
+     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
+    /**
+     * Allows the user to retrieve the last name of a customer object.
+     * 
+     * @return 
+     */
     public String getLastName() {
         return lastName;
     }
 
+    /**
+     * Allows the user to set the last name of a customer object.
+     * 
+     * @param id 
+     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
+    /**
+     * Allows the user to retrieve the age of a customer object.
+     * 
+     * @return 
+     */
     public int getAge() {
         return age;
     }
 
+    /**
+     * Allows the user to set the age of a customer object.
+     * 
+     * @param id 
+     */
     public void setAge(int age) {
         this.age = age;
     }
 
+    /**
+     * Allows the user to retrieve the home state of a customer object.
+     * 
+     * @return 
+     */
     public String getState() {
         return state;
     }
 
+    /**
+     * Allows the user to set the home state of a customer object.
+     * 
+     * @param id 
+     */
     public void setState(String state) {
         this.state = state;
     }
 
+    /**
+     * Allows the user to retrieve the purchase item of a customer object.
+     * 
+     * @return 
+     */
     public String getPurchase() {
         return purchase;
     }
 
+    /**
+     * Allows the user to set the purchase item of a customer object.
+     * 
+     * @param id 
+     */
     public void setPurchase(String state) {
         this.purchase = purchase;
     }
 
+    /**
+     * Allows the user to retrieve the purchase price of a customer object.
+     * 
+     * @return 
+     */
     public double getPrice() {
         return price;
     }
 
+    /**
+     * Allows the user to set the purchase price of a customer object.
+     * 
+     * @param id 
+     */
     public void setPrice(double price) {
         this.price = price;
     }

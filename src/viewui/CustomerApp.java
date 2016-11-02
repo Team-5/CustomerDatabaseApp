@@ -24,6 +24,10 @@ public class CustomerApp {
         menuLoop();
     }
 
+    /**
+     * Displays the console commands to interact with the database. This will
+     * have options for all the various menu items for this project.
+     */
     private void menuLoop() {
         int id, age;
         double price;
