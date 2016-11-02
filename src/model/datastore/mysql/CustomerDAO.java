@@ -221,7 +221,10 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return totalProfit;
     }
-
+/**
+ * This method will return the maximun, minimum, and average ages of the customers.
+ * @return 
+ */
     @Override
     public String customerAgeRange() {
         final String QUERY = "select avg(age), max(age), min(age) from customer";
