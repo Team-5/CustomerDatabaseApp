@@ -1,5 +1,6 @@
 package viewui;
 
+import java.util.List;
 import java.util.Scanner;
 import model.Customer;
 import model.ICustomerDAO;
@@ -42,7 +43,7 @@ public class CustomerApp {
             System.out.println("4 = Update Customer");
             System.out.println("5 = Delete Customer");
             System.out.println("6 = Show Total Profits");
-            System.out.println("7 = Show Age Range");
+            System.out.println("7 = Age Range");
             choice = Validator.getLine(sc, "Number of choice: ", "^[0-7]$");
 
             switch (choice) {
@@ -92,7 +93,14 @@ public class CustomerApp {
                     break;
                 case "7":
                     System.out.println("\n");
-                    System.out.println(cstList.customerAgeRange());
+                    int min = Validator.getInt(sc, "Minimum Age: ");
+                    int max = Validator.getInt(sc,"Maximum Age: ");
+                    List<Customer> customers = cstList.getAgeGroup(min, max);
+                    for(Customer c: customers){
+                        System.out.println(c);
+                    }
+                    
+                    System.out.println(String.format(("Customers in the age range %d-%d: %d"),min,max,customers.size()));
                     break;
             }
         }

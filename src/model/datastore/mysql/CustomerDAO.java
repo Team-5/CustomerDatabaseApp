@@ -200,7 +200,9 @@ public class CustomerDAO implements ICustomerDAO {
     public List<Customer> getAgeGroup(int minAge, int maxAge) {
         List<Customer> sorted = new ArrayList<>();
         for (Customer c : retrieveAllCustomers()) {
-            //SORT BY MIN-MAX AGE THEN ADD TO FINAL LIST
+            if(c.getAge() >= minAge && c.getAge() <= maxAge){
+                sorted.add(c);
+            }
         }
         return sorted;
     }
