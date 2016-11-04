@@ -25,13 +25,15 @@ public interface ICustomerDAO {
     void deleteCustomer(int id);
 
     void deleteCustomer(Customer customer);
-
-    List getAgeGroup(int minAge, int maxAge);
-
+    
+    List getAgeGroup(int minAge,int maxAge);
+    
     double showTotalProfits();
+    
+    double showAvgProfits();
 
     String customerAgeRange();
-
+    
     @Override
     String toString();
 }

@@ -48,6 +48,7 @@ public class CustomerApp {
             System.out.println("9 = Customer Age Group");
             choice = Validator.getLine(sc, "Number of choice: ", "^[0-9]$");
 
+
             switch (choice) {
                 case "1":
                     System.out.println("\n");
@@ -102,12 +103,12 @@ public class CustomerApp {
                     int min = Validator.getInt(sc, "Minimum Age: ");
                     int max = Validator.getInt(sc, "Maximum Age: ");
                     List<Customer> customers = cstList.getAgeGroup(min, max);
-                    for (Customer c : customers) {
+                    for(Customer c: customers){
                         System.out.println(c);
                 
                     }
-
-                    System.out.println(String.format(("Customers in the age range %d-%d: %d"), min, max, customers.size()));
+                    
+                    System.out.println(String.format(("Customers in the age range %d-%d: %d"),min,max,customers.size()));
                     break;
                 case "9":
                     System.out.println("\n");
