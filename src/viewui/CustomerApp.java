@@ -45,7 +45,8 @@ public class CustomerApp {
             System.out.println("6 = Show Total Profits");
             System.out.println("7 = Customer Age Range");
             System.out.println("8 = Customer Age Group");
-            choice = Validator.getLine(sc, "Number of choice: ", "^[0-8]$");
+            System.out.println("9 = Customer Age Group");
+            choice = Validator.getLine(sc, "Number of choice: ", "^[0-9]$");
 
             switch (choice) {
                 case "1":
@@ -103,9 +104,14 @@ public class CustomerApp {
                     List<Customer> customers = cstList.getAgeGroup(min, max);
                     for (Customer c : customers) {
                         System.out.println(c);
+                
                     }
 
                     System.out.println(String.format(("Customers in the age range %d-%d: %d"), min, max, customers.size()));
+                    break;
+                case "9":
+                    System.out.println("\n");
+                    System.out.println(cstList.showAvgProfits());
                     break;
             }
         }

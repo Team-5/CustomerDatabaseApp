@@ -224,6 +224,27 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return totalProfit;
     }
+    
+    /**
+     * Allows the user to see the average profit from each customer that their business has had in
+     * its history. This will add up all the purchases of all the customers
+     * stored in the database and divide by the total amount of customers.
+     *
+     * @return
+     */
+    
+    @Override
+    public double showAvgProfits() {
+        List<Customer> mylist = new ArrayList<>();
+        double totalProfit = 0;
+        int totalCustomers = retrieveAllCustomers().size();
+        for (Customer customer : retrieveAllCustomers()) {
+            totalProfit = totalProfit + customer.getPrice();
+        }
+        return totalProfit / totalCustomers;
+    }
+    
+    
 
     /**
      * This method will return the maximun, minimum, and average ages of the

@@ -178,6 +178,11 @@ public class CustomerDAO implements ICustomerDAO {
     public double showTotalProfits() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
+    @Override
+    public double showAvgProfits() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public String customerAgeRange() {
