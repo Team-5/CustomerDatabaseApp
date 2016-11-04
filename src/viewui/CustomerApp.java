@@ -43,8 +43,9 @@ public class CustomerApp {
             System.out.println("4 = Update Customer");
             System.out.println("5 = Delete Customer");
             System.out.println("6 = Show Total Profits");
-            System.out.println("7 = Age Range");
-            choice = Validator.getLine(sc, "Number of choice: ", "^[0-7]$");
+            System.out.println("7 = Customer Age Range");
+            System.out.println("8 = Customer Age Group");
+            choice = Validator.getLine(sc, "Number of choice: ", "^[0-8]$");
 
             switch (choice) {
                 case "1":
@@ -92,6 +93,9 @@ public class CustomerApp {
                     System.out.println("Total profit of all purchases: $" + cstList.showTotalProfits());
                     break;
                 case "7":
+                    System.out.println("\n");
+                    System.out.println(cstList.customerAgeRange());
+                case "8":
                     System.out.println("\n");
                     int min = Validator.getInt(sc, "Minimum Age: ");
                     int max = Validator.getInt(sc,"Maximum Age: ");
