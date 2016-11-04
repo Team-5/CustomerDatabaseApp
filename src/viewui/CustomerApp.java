@@ -95,16 +95,17 @@ public class CustomerApp {
                 case "7":
                     System.out.println("\n");
                     System.out.println(cstList.customerAgeRange());
+                    break;
                 case "8":
                     System.out.println("\n");
                     int min = Validator.getInt(sc, "Minimum Age: ");
-                    int max = Validator.getInt(sc,"Maximum Age: ");
+                    int max = Validator.getInt(sc, "Maximum Age: ");
                     List<Customer> customers = cstList.getAgeGroup(min, max);
-                    for(Customer c: customers){
+                    for (Customer c : customers) {
                         System.out.println(c);
                     }
-                    
-                    System.out.println(String.format(("Customers in the age range %d-%d: %d"),min,max,customers.size()));
+
+                    System.out.println(String.format(("Customers in the age range %d-%d: %d"), min, max, customers.size()));
                     break;
             }
         }

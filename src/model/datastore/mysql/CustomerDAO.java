@@ -24,7 +24,8 @@ public class CustomerDAO implements ICustomerDAO {
     /**
      * Allows the user to create a new customer in the database. This can then
      * be manipulated by the other menu items.
-     * @param customer 
+     *
+     * @param customer
      */
     @Override
     public void createCustomer(Customer customer) {
@@ -52,9 +53,9 @@ public class CustomerDAO implements ICustomerDAO {
     /**
      * Allows the user to retrieve a single customer record according to the ID
      * that they gave.
-     * 
+     *
      * @param id
-     * @return 
+     * @return
      */
     @Override
     public Customer retrieveCustomerById(int id) {
@@ -89,8 +90,8 @@ public class CustomerDAO implements ICustomerDAO {
 
     /**
      * Allows the user to retrieve all of the customers in the entire database.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public List<Customer> retrieveAllCustomers() {
@@ -123,8 +124,8 @@ public class CustomerDAO implements ICustomerDAO {
 
     /**
      * Allows the user to change the information for a single customer.
-     * 
-     * @param updatedCustomer 
+     *
+     * @param updatedCustomer
      */
     @Override
     public void updateCustomer(Customer updatedCustomer) {
@@ -153,8 +154,8 @@ public class CustomerDAO implements ICustomerDAO {
     /**
      * Allows the user to delete a single customer in the database according to
      * the ID that they entered.
-     * 
-     * @param id 
+     *
+     * @param id
      */
     @Override
     public void deleteCustomer(int id) {
@@ -176,8 +177,8 @@ public class CustomerDAO implements ICustomerDAO {
     /**
      * Allows the user to get the ID of a customer object and then delete that
      * customer.
-     * 
-     * @param customer 
+     *
+     * @param customer
      */
     @Override
     public void deleteCustomer(Customer customer) {
@@ -200,7 +201,7 @@ public class CustomerDAO implements ICustomerDAO {
     public List<Customer> getAgeGroup(int minAge, int maxAge) {
         List<Customer> sorted = new ArrayList<>();
         for (Customer c : retrieveAllCustomers()) {
-            if(c.getAge() >= minAge && c.getAge() <= maxAge){
+            if (c.getAge() >= minAge && c.getAge() <= maxAge) {
                 sorted.add(c);
             }
         }
@@ -208,11 +209,11 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     /**
-     * Allows the user to see the total profits that their business has made
-     * in its history. This will add up all the purchases of all the customers
+     * Allows the user to see the total profits that their business has made in
+     * its history. This will add up all the purchases of all the customers
      * stored in the database.
-     * 
-     * @return 
+     *
+     * @return
      */
     @Override
     public double showTotalProfits() {
@@ -223,10 +224,13 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return totalProfit;
     }
-/**
- * This method will return the maximun, minimum, and average ages of the customers.
- * @return 
- */
+
+    /**
+     * This method will return the maximun, minimum, and average ages of the
+     * customers.
+     *
+     * @return
+     */
     @Override
     public String customerAgeRange() {
         final String QUERY = "select avg(age), max(age), min(age) from customer";
