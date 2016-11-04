@@ -5,6 +5,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import model.Customer;
 import model.ICustomerDAO;
@@ -179,6 +181,17 @@ public class CustomerDAO implements ICustomerDAO {
             totalProfit = totalProfit + customer.getPrice();
         }
         return totalProfit;
+    }
+
+    @Override
+    public double showTotalPurchasedItems() {
+        List<Customer> myList = new ArrayList<>();
+        double count = 0;
+        for (Customer customer : retrieveAllCustomers()) {
+            count = count + Double.parseDouble(customer.getPurchase());
+        }
+
+        return count;
     }
 
     @Override

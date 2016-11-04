@@ -32,6 +32,8 @@ public interface ICustomerDAO {
 
     String customerAgeRange();
     
+    double showTotalPurchasedItems();
+    
     @Override
     String toString();
 }
