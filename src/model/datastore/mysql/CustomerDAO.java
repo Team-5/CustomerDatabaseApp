@@ -23,6 +23,12 @@ public class CustomerDAO implements ICustomerDAO {
 
     protected final static boolean DEBUG = false;
 
+    /**
+     * Allows the user to create a new customer in the database. This can then
+     * be manipulated by the other menu items.
+     *
+     * @param customer 
+     */
     @Override
     public void createCustomer(Customer customer) {
         final String QUERY = "insert into customer "
@@ -46,6 +52,13 @@ public class CustomerDAO implements ICustomerDAO {
         }
     }
 
+    /**
+     * Allows the user to retrieve a single customer record according to the ID
+     * that they gave.
+     * 
+     * @param id
+     * @return 
+     */
     @Override
     public Customer retrieveCustomerById(int id) {
 
@@ -77,6 +90,11 @@ public class CustomerDAO implements ICustomerDAO {
         return cst;
     }
 
+    /**
+     * Allows the user to retrieve all of the customers in the entire database.
+     * 
+     * @return 
+     */
     @Override
     public List<Customer> retrieveAllCustomers() {
 
@@ -106,6 +124,11 @@ public class CustomerDAO implements ICustomerDAO {
         return myList;
     }
 
+    /**
+     * Allows the user to change the information for a single customer.
+     * 
+     * @param updatedCustomer 
+     */
     @Override
     public void updateCustomer(Customer updatedCustomer) {
 
@@ -130,6 +153,12 @@ public class CustomerDAO implements ICustomerDAO {
         }
     }
 
+    /**
+     * Allows the user to delete a single customer in the database according to
+     * the ID that they entered.
+     * 
+     * @param id 
+     */
     @Override
     public void deleteCustomer(int id) {
 
@@ -147,6 +176,12 @@ public class CustomerDAO implements ICustomerDAO {
         }
     }
 
+    /**
+     * Allows the user to get the ID of a customer object and then delete that
+     * customer.
+     * 
+     * @param customer 
+     */
     @Override
     public void deleteCustomer(Customer customer) {
 
@@ -168,11 +203,20 @@ public class CustomerDAO implements ICustomerDAO {
     public List<Customer> getAgeGroup(int minAge, int maxAge) {
         List<Customer> sorted = new ArrayList<>();
         for (Customer c : retrieveAllCustomers()) {
-            //SORT BY MIN-MAX AGE THEN ADD TO FINAL LIST
+            if(c.getAge() >= minAge && c.getAge() <= maxAge){
+                sorted.add(c);
+            }
         }
         return sorted;
     }
 
+    /**
+     * Allows the user to see the total profits that their business has made
+     * in its history. This will add up all the purchases of all the customers
+     * stored in the database.
+     * 
+     * @return 
+     */
     @Override
     public double showTotalProfits() {
         List<Customer> mylist = new ArrayList<>();
@@ -182,6 +226,35 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return totalProfit;
     }
+
+    
+    /**
+     * Allows the user to see the average profit from each customer that their business has had in
+     * its history. This will add up all the purchases of all the customers
+     * stored in the database and divide by the total amount of customers.
+     *
+     * @return
+     */
+    
+    @Override
+    public double showAvgProfits() {
+        List<Customer> mylist = new ArrayList<>();
+        double totalProfit = 0;
+        int totalCustomers = retrieveAllCustomers().size();
+        for (Customer customer : retrieveAllCustomers()) {
+            totalProfit = totalProfit + customer.getPrice();
+        }
+        return totalProfit / totalCustomers;
+    }
+    
+    
+
+    /**
+     * This method will return the maximun, minimum, and average ages of the
+     * customers.
+     *
+     * @return
+     */
 
     @Override
     public double showTotalPurchasedItems() {

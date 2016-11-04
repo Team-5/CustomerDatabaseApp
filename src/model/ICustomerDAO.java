@@ -29,6 +29,8 @@ public interface ICustomerDAO {
     List getAgeGroup(int minAge,int maxAge);
     
     double showTotalProfits();
+    
+    double showAvgProfits();
 
     String customerAgeRange();
     

@@ -1,5 +1,6 @@
 package viewui;
 
+import java.util.List;
 import java.util.Scanner;
 import model.Customer;
 import model.ICustomerDAO;
@@ -24,6 +25,10 @@ public class CustomerApp {
         menuLoop();
     }
 
+    /**
+     * Displays the console commands to interact with the database. This will
+     * have options for all the various menu items for this project.
+     */
     private void menuLoop() {
         int id, age;
         double price;
@@ -40,7 +45,9 @@ public class CustomerApp {
             System.out.println("6 = Show Total Profits");
             System.out.println("7 = Show Age Range");
             System.out.println("8 = Show items purchased");
-            choice = Validator.getLine(sc, "Number of choice: ", "^[0-8]$");
+            System.out.println("9 = Show Customer Age Group");
+            System.out.println("10 = Show Average Profits");
+            choice = Validator.getLine(sc, "Number of choice: ", "^[0-10]$");
 
             switch (choice) {
                 case "1":
@@ -94,6 +101,20 @@ public class CustomerApp {
                 case "8":
                     System.out.println("\n");
                     System.out.println("Total number of items purchased: $" + cstList.showTotalPurchasedItems());
+                case "9":
+                    int min = Validator.getInt(sc, "Minimum Age: ");
+                    int max = Validator.getInt(sc, "Maximum Age: ");
+                    List<Customer> customers = cstList.getAgeGroup(min, max);
+                    for(Customer c: customers){
+                        System.out.println(c);
+                
+                    }
+                    
+                    System.out.println(String.format(("Customers in the age range %d-%d: %d"),min,max,customers.size()));
+                    break;
+                case "10":
+                    System.out.println("\n");
+                    System.out.println(cstList.showAvgProfits());
                     break;
             }
         }
