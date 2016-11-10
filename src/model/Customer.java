@@ -1,14 +1,14 @@
 package model;
 
 /**
- * The Customer class represents a single customer. This customer will enter
+ * The "Customer" class represents a single customer. This customer will enter
  * their personal information voluntarily so that the business can gather
  * demographics of their customers. For example, which age groups are buying
- * which products? Where are the majority of theri customers located? What are
+ * which products? Where are the majority of their customers located? What are
  * people buying most?
  *
- * @author Lisa Caswell and Jason Whiting
- * @version 2016-10-20
+ * @authors Lisa Caswell and Jason Whiting
+ * @version 2016-11-10
  */
 public class Customer {
 
@@ -34,16 +34,16 @@ public class Customer {
     }
 
     /**
-     * constructor that sets all variables equal to the customer object that is
-     * passed in.
-     * 
+     * constructor that sets all variables equal to the customer object
+     * variables that are passed in.
+     *
      * @param id
      * @param firstName
      * @param lastName
      * @param age
      * @param state
      * @param purchase
-     * @param price 
+     * @param price
      */
     public Customer(int id, String firstName, String lastName, int age, String state, String purchase, double price) {
         this.id = id;
@@ -57,8 +57,8 @@ public class Customer {
 
     /**
      * Allows the user to retrieve the ID of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getId() {
         return id;
@@ -66,8 +66,8 @@ public class Customer {
 
     /**
      * Allows the user to set the ID of a customer object.
-     * 
-     * @param id 
+     *
+     * @param id
      */
     public void setId(int id) {
         this.id = id;
@@ -75,8 +75,8 @@ public class Customer {
 
     /**
      * Allows the user to retrieve the first name of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getFirstName() {
         return firstName;
@@ -84,8 +84,8 @@ public class Customer {
 
     /**
      * Allows the user to set the first name of a customer object.
-     * 
-     * @param id 
+     *
+     * @param firstName
      */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
@@ -93,8 +93,8 @@ public class Customer {
 
     /**
      * Allows the user to retrieve the last name of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getLastName() {
         return lastName;
@@ -102,8 +102,8 @@ public class Customer {
 
     /**
      * Allows the user to set the last name of a customer object.
-     * 
-     * @param id 
+     *
+     * @param lastName
      */
     public void setLastName(String lastName) {
         this.lastName = lastName;
@@ -111,8 +111,8 @@ public class Customer {
 
     /**
      * Allows the user to retrieve the age of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public int getAge() {
         return age;
@@ -120,8 +120,8 @@ public class Customer {
 
     /**
      * Allows the user to set the age of a customer object.
-     * 
-     * @param id 
+     *
+     * @param age
      */
     public void setAge(int age) {
         this.age = age;
@@ -129,8 +129,8 @@ public class Customer {
 
     /**
      * Allows the user to retrieve the home state of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getState() {
         return state;
@@ -138,8 +138,8 @@ public class Customer {
 
     /**
      * Allows the user to set the home state of a customer object.
-     * 
-     * @param id 
+     *
+     * @param state
      */
     public void setState(String state) {
         this.state = state;
@@ -147,8 +147,8 @@ public class Customer {
 
     /**
      * Allows the user to retrieve the purchase item of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getPurchase() {
         return purchase;
@@ -156,17 +156,17 @@ public class Customer {
 
     /**
      * Allows the user to set the purchase item of a customer object.
-     * 
-     * @param id 
+     *
+     * @param purchase
      */
-    public void setPurchase(String state) {
+    public void setPurchase(String purchase) {
         this.purchase = purchase;
     }
 
     /**
      * Allows the user to retrieve the purchase price of a customer object.
-     * 
-     * @return 
+     *
+     * @return
      */
     public double getPrice() {
         return price;
@@ -174,8 +174,8 @@ public class Customer {
 
     /**
      * Allows the user to set the purchase price of a customer object.
-     * 
-     * @param id 
+     *
+     * @param price
      */
     public void setPrice(double price) {
         this.price = price;

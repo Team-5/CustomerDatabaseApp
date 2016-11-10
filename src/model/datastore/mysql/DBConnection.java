@@ -8,11 +8,11 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 /**
- * Get a connection to the database. DBConnection is based on code taken from
- * Professor John Phillip's program.
+ * The "DBConnection" class gets a connection to the database. DBConnection is
+ * based on code taken from Professor John Phillip's program.
  *
  * @author Jason Whiting
- * @version 2016-20-20
+ * @version 2016-11-10
  */
 public class DBConnection {
 

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import org.junit.Test;
@@ -10,11 +5,14 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author 55johnslw26
+ * @authors Lucas Johns and Jason Whiting
+ * @version 2016-11-10
  */
 public class CustomerTest {
+    
     //int id, String firstName, String lastName, int age, String state, String purchase, double price
     Customer instance = new Customer(2,"Count","Dracula",100,"Transylvania","Black Silk Cape",49.99);
+    
     /**
      * Test of getId method, of class Customer.
      */
@@ -24,7 +22,6 @@ public class CustomerTest {
         int expResult = 2;
         int result = instance.getId();
         assertEquals(expResult, result);
-
     }
 
     /**
@@ -102,6 +99,5 @@ public class CustomerTest {
         double expResult = 49.99;
         double result = instance.getPrice();
         assertEquals(expResult, result, 0.0);
-    }
-    
+    } 
 }

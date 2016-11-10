@@ -12,20 +12,21 @@ import model.Customer;
 import model.ICustomerDAO;
 
 /**
- * CustomerDAO (Data Access Object) handles all the interactions with the data
- * store. This version uses a MySQL database to store the data. It is multi-user
- * safe.
+ * The "CustomerDAO" (Data Access Object) class handles all the interactions
+ * with the data store. This version uses a MySQL database to store the data. It
+ * is multi-user safe.
  *
- * @author Jason Whiting, Lisa Caswell, Willie Scott, Jeremy Wiles, and Lucas Johns
- * @version 2016-10-20
+ * @authors Jason Whiting, Lisa Caswell, Willie Scott, Jeremy Wiles, and Lucas
+ * Johns
+ * @version 2016-11-10
  */
 public class CustomerDAO implements ICustomerDAO {
 
     protected final static boolean DEBUG = false;
 
     /**
-     * Allows the user to create a new customer in the database. This can then
-     * be manipulated by the other menu items.
+     * Allows the user to create a new customer object in the database. This can
+     * then be manipulated by the other menu items.
      *
      * @param customer
      */
@@ -54,7 +55,7 @@ public class CustomerDAO implements ICustomerDAO {
 
     /**
      * Allows the user to retrieve a single customer record according to the ID
-     * that they gave.
+     * that they pass in.
      *
      * @param id
      * @return
@@ -91,7 +92,8 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     /**
-     * Allows the user to retrieve all of the customers in the entire database.
+     * Allows the user to retrieve all of the customers in the entire database
+     * and display them together.
      *
      * @return
      */
@@ -125,7 +127,9 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     /**
-     * Allows the user to change the information for a single customer.
+     * Allows the user to change the information for a single customer. This
+     * requires that they change all fields for the customer object, but are
+     * able to pass in the same values for the fields they don't want to change.
      *
      * @param updatedCustomer
      */
@@ -201,7 +205,8 @@ public class CustomerDAO implements ICustomerDAO {
 
     /**
      * Allows the user to pass in two integer numbers and see which customers
-     * are within that age range.
+     * are within that age range. This method will also display how many
+     * customers altogether appear in that age range.
      *
      * @param minAge
      * @param maxAge
@@ -221,7 +226,7 @@ public class CustomerDAO implements ICustomerDAO {
     /**
      * Allows the user to see the total profits that their business has made in
      * its history. This will add up all the purchases of all the customers
-     * stored in the database.
+     * stored in the database and display it as a single sum.
      *
      * @return
      */
@@ -255,7 +260,7 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     /**
-     * Allows the user to see the total number or purchases a single item has
+     * Allows the user to see the total number of purchases a single item has
      * had. In other words, it shows which items are in demand and which are
      * not.
      *
@@ -272,8 +277,9 @@ public class CustomerDAO implements ICustomerDAO {
     }
 
     /**
-     * This method will return the maximun, minimum, and average ages of the
-     * customers.
+     * This method will return the maximum, minimum, and average ages of the
+     * customers. Unlike the "getAgeGroup" method, this method will simple
+     * provide an overview of the age range of all the customers.
      *
      * @return
      */

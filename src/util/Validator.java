@@ -3,12 +3,12 @@ package util;
 import java.util.Scanner;
 
 /**
- * Prompts for and then validates console based input. Based on code written by
- * Professor John Phillips, who based his code in part on Murach's Java SE 6 by
- * Joel Murach, et. al.
+ * The "Validator" class prompts for and then validates console based input. It
+ * is based on code written by Professor John Phillips, who based his code in
+ * part on Murach's Java SE 6 by Joel Murach, et. al.
  *
  * @author Jason Whiting
- * @version 2016-10-20
+ * @version 2016-11-10
  */
 public class Validator {
 
@@ -78,7 +78,8 @@ public class Validator {
 
     /**
      * Prompts the user with a message and then retrieves what the user types as
-     * an integer and checks that it is within a proper range.
+     * an integer. It also checks that it is within a proper range. If it is
+     * not, then an error message will be displayed.
      *
      * @param sc
      * @param prompt
@@ -128,7 +129,8 @@ public class Validator {
 
     /**
      * Prompts the user with a message and then retrieves what the user types as
-     * an long data type and checks that it is within a proper range.
+     * an long data type. It also checks that it is within a proper range. If it
+     * is not, then an error message will be displayed.
      *
      * @param sc
      * @param prompt
@@ -178,7 +180,8 @@ public class Validator {
 
     /**
      * Prompts the user with a message and then retrieves what the user types as
-     * an double data type and checks that it is within a proper range.
+     * an double data type. It also checks that it is within a proper range. If
+     * it is not, then an error message will be displayed.
      *
      * @param sc
      * @param prompt
