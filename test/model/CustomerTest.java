@@ -10,8 +10,7 @@ import static org.junit.Assert.*;
  */
 public class CustomerTest {
     
-    //int id, String firstName, String lastName, int age, String state, String purchase, double price
-    Customer instance = new Customer(2,"Count","Dracula",100,"Transylvania","Black Silk Cape",49.99);
+    Customer instance = new Customer(1, "Jason", "Whiting", 19, "Pennsylvania", "Playstation 4", 249.99);
     
     /**
      * Test of getId method, of class Customer.
@@ -19,7 +18,7 @@ public class CustomerTest {
     @Test
     public void testGetId() {
         System.out.println("getId");
-        int expResult = 2;
+        int expResult = 1;
         int result = instance.getId();
         assertEquals(expResult, result);
     }
@@ -40,7 +39,7 @@ public class CustomerTest {
     @Test
     public void testGetFirstName() {
         System.out.println("getFirstName");
-        String expResult = "Count";
+        String expResult = "Jason";
         String result = instance.getFirstName();
         assertEquals(expResult, result);
     }
@@ -51,7 +50,7 @@ public class CustomerTest {
     @Test
     public void testGetLastName() {
         System.out.println("getLastName");
-        String expResult = "Dracula";
+        String expResult = "Whiting";
         String result = instance.getLastName();
         assertEquals(expResult, result);
     }
@@ -62,7 +61,7 @@ public class CustomerTest {
     @Test
     public void testGetAge() {
         System.out.println("getAge");
-        int expResult = 100;
+        int expResult = 19;
         int result = instance.getAge();
         assertEquals(expResult, result);
     }
@@ -73,7 +72,7 @@ public class CustomerTest {
     @Test
     public void testGetState() {
         System.out.println("getState");
-        String expResult = "Transylvania";
+        String expResult = "Pennsylvania";
         String result = instance.getState();
         assertEquals(expResult, result);
     }
@@ -84,7 +83,7 @@ public class CustomerTest {
     @Test
     public void testGetPurchase() {
         System.out.println("getPurchase");
-        String expResult = "Black Silk Cape";
+        String expResult = "Playstation 4";
         String result = instance.getPurchase();
         assertEquals(expResult, result);
     }
@@ -96,7 +95,7 @@ public class CustomerTest {
     public void testGetPrice() {
         System.out.println("getPrice");
         
-        double expResult = 49.99;
+        double expResult = 249.99;
         double result = instance.getPrice();
         assertEquals(expResult, result, 0.0);
     } 

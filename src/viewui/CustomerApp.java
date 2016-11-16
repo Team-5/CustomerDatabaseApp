@@ -116,7 +116,8 @@ public class CustomerApp {
 
                 case "8":
                     System.out.println("\n");
-                    System.out.println("Total number of items purchased: " + cstList.showTotalPurchasedItems());
+                    String item = Validator.getLine(sc, "Item to Search: ");
+                    System.out.println("Total number of " + item + " purchased: " + cstList.showNumberOfItemsPurchased(item));
                     break;
 
                 case "9":

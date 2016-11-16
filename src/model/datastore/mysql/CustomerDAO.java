@@ -210,7 +210,7 @@ public class CustomerDAO implements ICustomerDAO {
      *
      * @param minAge
      * @param maxAge
-     * @return
+     * @return sorted
      */
     @Override
     public List<Customer> getAgeGroup(int minAge, int maxAge) {
@@ -228,7 +228,7 @@ public class CustomerDAO implements ICustomerDAO {
      * its history. This will add up all the purchases of all the customers
      * stored in the database and display it as a single sum.
      *
-     * @return
+     * @return totalProfit
      */
     @Override
     public double showTotalProfits() {
@@ -246,7 +246,7 @@ public class CustomerDAO implements ICustomerDAO {
      * all the customers stored in the database and divide by the total amount
      * of customers.
      *
-     * @return
+     * @return totalProfit / totalCustomers
      */
     @Override
     public double showAvgProfits() {
@@ -264,7 +264,7 @@ public class CustomerDAO implements ICustomerDAO {
      * had. In other words, it shows which items are in demand and which are
      * not.
      *
-     * @return
+     * @return count
      */
     @Override
     public double showTotalPurchasedItems() {
@@ -275,13 +275,27 @@ public class CustomerDAO implements ICustomerDAO {
         }
         return count;
     }
+    /**
+     * This is just a test method to figure out how to fix the menu item above.
+     * 
+     * @return count
+     */
+    public int showNumberOfItemsPurchased(String item) {
+        int count = 0;
+        for (Customer customer : retrieveAllCustomers()) {
+            if (customer.getPurchase().matches(item)) {
+                count++;
+            } 
+        }
+        return count;
+    }
 
     /**
      * This method will return the maximum, minimum, and average ages of the
      * customers. Unlike the "getAgeGroup" method, this method will simple
      * provide an overview of the age range of all the customers.
      *
-     * @return
+     * @return display
      */
     @Override
     public String customerAgeRange() {
