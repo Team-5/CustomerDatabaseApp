@@ -267,20 +267,7 @@ public class CustomerDAO implements ICustomerDAO {
      * @return count
      */
     @Override
-    public double showTotalPurchasedItems() {
-        List<Customer> myList = new ArrayList<>();
-        double count = 0;
-        for (Customer customer : retrieveAllCustomers()) {
-            count = count + Double.parseDouble(customer.getPurchase());
-        }
-        return count;
-    }
-    /**
-     * This is just a test method to figure out how to fix the menu item above.
-     * 
-     * @return count
-     */
-    public int showNumberOfItemsPurchased(String item) {
+    public double showTotalPurchasedItems(String item) {
         int count = 0;
         for (Customer customer : retrieveAllCustomers()) {
             if (customer.getPurchase().matches(item)) {

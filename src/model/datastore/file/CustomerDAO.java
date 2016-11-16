@@ -189,14 +189,9 @@ public class CustomerDAO implements ICustomerDAO {
     public String customerAgeRange() {
         throw new UnsupportedOperationException("Not supported yet.");
     }
-   @Override
-    public double showTotalPurchasedItems() {
-
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
+    
     @Override
-    public int showNumberOfItemsPurchased(String item) {
+    public double showTotalPurchasedItems(String item) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

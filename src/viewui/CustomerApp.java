@@ -52,7 +52,7 @@ public class CustomerApp {
             System.out.println("5 = Delete Customer");
             System.out.println("6 = Show Total Profits");
             System.out.println("7 = Show Age Range");
-            System.out.println("8 = Show items purchased");
+            System.out.println("8 = Show Number of Items Purchased");
             System.out.println("9 = Show Customer Age Group");
             System.out.println("10 = Show Average Profits\n");
             choice = Validator.getLine(sc, "Number of choice: ", "^\\d+$");
@@ -117,7 +117,7 @@ public class CustomerApp {
                 case "8":
                     System.out.println("\n");
                     String item = Validator.getLine(sc, "Item to Search: ");
-                    System.out.println("Total number of " + item + " purchased: " + cstList.showNumberOfItemsPurchased(item));
+                    System.out.println("Total number of " + item + " purchased: " + cstList.showTotalPurchasedItems(item));
                     break;
 
                 case "9":
