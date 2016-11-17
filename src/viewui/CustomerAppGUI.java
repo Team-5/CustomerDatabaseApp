@@ -4,11 +4,14 @@ import java.util.List;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import model.Customer;
@@ -40,9 +43,7 @@ public class CustomerAppGUI extends Application {
         // Create the GUI window and configure its properties.
         Stage window = new Stage();
         window.setTitle("Customer Application");
-        window.setMinHeight(600);
-        window.setMinWidth(500);
-        window.isResizable();
+        window.setResizable(false);
 
         //Create a pane to hold all the elements of the program.
         BorderPane outer = new BorderPane();
@@ -156,11 +157,33 @@ public class CustomerAppGUI extends Application {
 
         //Create a TextArea to display the console commands.
         TextArea output = new TextArea();
+        output.isWrapText();
+        output.setEditable(false);
         outer.setCenter(output);
 
+        //Create an HBox for the user's input field and its label.
+        HBox user = new HBox();
+        user.setAlignment(Pos.CENTER);
+        user.setPadding(new Insets(10, 0, 10, 10));
+        user.setSpacing(10);
+        
+        //Create a label to place next to the user text field.
+        //I set this so that is would no appear on the actual window. 
+        //This is because, once I had set up the spacing so that it looked
+        //nice, I added this prompt to the text field itself.
+        //I didn't want to mess up the spacing, to I just kept this here.
+        Label label = new Label("Enter Commands Here: ");
+        label.setVisible(false);
+        
         //Create a TextField to read in user commands.
         TextField input = new TextField();
-        outer.setBottom(input);
+        input.setPromptText("Enter Your Commands Here.");
+        input.setEditable(true);
+        input.setMinWidth(403);
+        
+        //Place the HBox at the bottom of the pane.
+        user.getChildren().addAll(label, input);
+        outer.setBottom(user);
 
         //Set the stage and scene and then show it.
         Scene layout = new Scene(outer, 600, 500);
