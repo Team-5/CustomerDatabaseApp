@@ -295,7 +295,7 @@ public class CustomerDAO implements ICustomerDAO {
                 maxAge = rs.getInt("max(age)");
                 minAge = rs.getInt("min(age)");
             }
-            display = " Average Age: " + avgAge + "  Highest Age: " + maxAge + "  Lowest Age: " + minAge;
+            display = "Average Age: " + avgAge + ",   Highest Age: " + maxAge + ",   Lowest Age: " + minAge;
         } catch (SQLException ex) {
             System.out.println("customerAgeRange SQLException: " + ex.getMessage());
         }

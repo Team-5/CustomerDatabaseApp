@@ -32,6 +32,8 @@ public class CustomerAppGUI extends Application {
 
     ICustomerDAO cstList = new CustomerDAO();
     Scanner sc = new Scanner(System.in);
+    protected TextArea output = new TextArea();
+    protected TextField input = new TextField();
 
     public static void main(String[] args) {
         launch(args);
@@ -74,6 +76,9 @@ public class CustomerAppGUI extends Application {
             String purchase = Validator.getLine(sc, "New Customer Purchase: ");
             double price = Validator.getDouble(sc, "New Customer Payment Amount: ");
             cstList.createCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
+            output.appendText("Customer Entry #" + id + ": "+ firstName + " "+ lastName + ", "+ age + ", "+ state + ". ");
+            output.appendText("Purchased a " + purchase + " for $"+ price + ". ");
+            output.appendText("\n\nEntry Successfully Created.");
         });
 
         Button search = new Button("Search For Entry");
@@ -119,47 +124,46 @@ public class CustomerAppGUI extends Application {
             for (Customer c : customers) {
                 System.out.println(c);
             }
-            System.out.println(String.format(("Customers in the age range %d to %d: %d"), min, max, customers.size()));
+            output.appendText(String.format(("\n\nCustomers in the age range of %d to %d: %d"), min, max, customers.size()));
         });
 
         Button ageStats = new Button("Customer Age Range");
         ageStats.setMaxWidth(Double.MAX_VALUE);
         ageStats.setOnAction(e -> {
-            System.out.println("\n");
-            System.out.println(cstList.customerAgeRange());
+            output.appendText("\n\n" + cstList.customerAgeRange());
         });
 
         Button totalProfit = new Button("Show Total Profits");
         totalProfit.setMaxWidth(Double.MAX_VALUE);
         totalProfit.setOnAction(e -> {
-            System.out.println("\n");
-            System.out.println("Total profit of all purchases: $" + cstList.showTotalProfits());
+            output.appendText("\n\nTotal profit of all purchases: $" + cstList.showTotalProfits());
         });
 
         Button averageProfit = new Button("Show Average Profits");
         averageProfit.setMaxWidth(Double.MAX_VALUE);
         averageProfit.setOnAction(e -> {
-            System.out.println("\n");
-            System.out.println("Average profits of all purchases: " + cstList.showAvgProfits());
+            output.appendText("\n\nAverage profits of all purchases: $" + cstList.showAvgProfits());
         });
 
         Button itemsBought = new Button("Show Items Bought");
         itemsBought.setMaxWidth(Double.MAX_VALUE);
         itemsBought.setOnAction(e -> {
-            System.out.println("\n");
             String item = Validator.getLine(sc, "Item to Search: ");
-            System.out.println("Total number of " + item + " purchased: " + cstList.showTotalPurchasedItems(item));
+            output.appendText("\n\nTotal number of " + item + "'s purchased: " + cstList.showTotalPurchasedItems(item));
         });
 
         //Add all the buttons to the VBox and set the VBox in the pane.
         menu.getChildren().addAll(list, create, search, update, delete, ageGroup, ageStats, totalProfit, averageProfit, itemsBought);
         outer.setLeft(menu);
 
-        //Create a TextArea to display the console commands.
-        TextArea output = new TextArea();
-        output.isWrapText();
+        //Add properties to TextArea to display the console commands.
+        output.setWrapText(true);
         output.setEditable(false);
         outer.setCenter(output);
+        
+        output.setText("Welcome to the Team-5 Customer Information Application. ");
+        output.appendText("-----------------------------------------"
+                + "-----------------------------------------");
 
         //Create an HBox for the user's input field and its label.
         HBox user = new HBox();
@@ -175,8 +179,7 @@ public class CustomerAppGUI extends Application {
         Label label = new Label("Enter Commands Here: ");
         label.setVisible(false);
         
-        //Create a TextField to read in user commands.
-        TextField input = new TextField();
+        //Add properties to TextField to read in user commands.
         input.setPromptText("Enter Your Commands Here.");
         input.setEditable(true);
         input.setMinWidth(403);

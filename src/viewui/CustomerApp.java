@@ -60,12 +60,12 @@ public class CustomerApp {
             switch (choice) {
 
                 case "1":
-                    System.out.println("\n");
+                    System.out.println();
                     System.out.println(cstList.toString());
                     break;
 
                 case "2":
-                    System.out.println("\n");
+                    System.out.println();
                     id = Validator.getInt(sc, "New Customer ID: ");
                     firstName = Validator.getLine(sc, "New Customer First Name: ");
                     lastName = Validator.getLine(sc, "New Customer Last Name: ");
@@ -77,13 +77,13 @@ public class CustomerApp {
                     break;
 
                 case "3":
-                    System.out.println("\n");
+                    System.out.println();
                     id = Validator.getInt(sc, "Customer ID to Retrieve: ");
                     System.out.println(cstList.retrieveCustomerById(id));
                     break;
 
                 case "4":
-                    System.out.println("\n");
+                    System.out.println();
                     id = Validator.getInt(sc, "Customer ID to Update: ");
                     firstName = Validator.getLine(sc, "Customer First Name: ");
                     lastName = Validator.getLine(sc, "Customer Last Name: ");
@@ -95,7 +95,7 @@ public class CustomerApp {
                     break;
 
                 case "5":
-                    System.out.println("\n");
+                    System.out.println();
                     id = Validator.getInt(sc, "Customer ID to Delete: ");
                     System.out.println(cstList.retrieveCustomerById(id));
                     String ok = Validator.getLine(sc, "Delete this Customer? (y/n): ", "^[yYnN]$");
@@ -105,34 +105,35 @@ public class CustomerApp {
                     break;
 
                 case "6":
-                    System.out.println("\n");
+                    System.out.println();
                     System.out.println("Total profit of all purchases: $" + cstList.showTotalProfits());
                     break;
 
                 case "7":
-                    System.out.println("\n");
+                    System.out.println();
                     System.out.println(cstList.customerAgeRange());
                     break;
 
                 case "8":
-                    System.out.println("\n");
+                    System.out.println();
                     String item = Validator.getLine(sc, "Item to Search: ");
-                    System.out.println("Total number of " + item + " purchased: " + cstList.showTotalPurchasedItems(item));
+                    System.out.println("\nTotal number of " + item + "'s purchased: " + cstList.showTotalPurchasedItems(item));
                     break;
 
                 case "9":
+                    System.out.println();
                     int min = Validator.getInt(sc, "Minimum Age: ");
                     int max = Validator.getInt(sc, "Maximum Age: ");
                     List<Customer> customers = cstList.getAgeGroup(min, max);
                     for (Customer c : customers) {
                         System.out.println(c);
                     }
-                    System.out.println(String.format(("Customers in the age range %d to %d: %d"), min, max, customers.size()));
+                    System.out.println(String.format(("\nCustomers in the age range %d to %d: %d"), min, max, customers.size()));
                     break;
 
                 case "10":
-                    System.out.println("\n");
-                    System.out.println("Average profits of all purchases: " + cstList.showAvgProfits());
+                    System.out.println();
+                    System.out.println("Average profits of all purchases: $" + cstList.showAvgProfits());
                     break;
             }
         }
