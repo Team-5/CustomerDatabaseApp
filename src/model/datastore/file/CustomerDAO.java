@@ -191,7 +191,7 @@ public class CustomerDAO implements ICustomerDAO {
     }
     
     @Override
-    public double showTotalPurchasedItems(String item) {
+    public int showTotalPurchasedItems(String item) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 }

@@ -60,8 +60,9 @@ public class CustomerAppGUI extends Application {
         Button list = new Button("List All Entries");
         list.setMaxWidth(Double.MAX_VALUE);
         list.setOnAction(e -> {
-            System.out.println("\n");
-            System.out.println(cstList.toString());
+            output.appendText("All Customer Entries:\n\n");
+            output.appendText(cstList.toString());
+            output.appendText("\n");
         });
 
         Button create = new Button("Create New Entry");
@@ -76,23 +77,23 @@ public class CustomerAppGUI extends Application {
             String purchase = Validator.getLine(sc, "New Customer Purchase: ");
             double price = Validator.getDouble(sc, "New Customer Payment Amount: ");
             cstList.createCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
-            output.appendText("Customer Entry #" + id + ": "+ firstName + " "+ lastName + ", "+ age + ", "+ state + ". ");
-            output.appendText("Purchased a " + purchase + " for $"+ price + ". ");
-            output.appendText("\n\nEntry Successfully Created.");
+            output.appendText("Customer Entry #" + id + ": " + firstName + " " + lastName + ", " + age + ", " + state + ". ");
+            output.appendText("Purchased a " + purchase + " for $" + price + ". ");
+            output.appendText("Entry Successfully Created.");
+            output.appendText("\n\n");
         });
 
         Button search = new Button("Search For Entry");
         search.setMaxWidth(Double.MAX_VALUE);
         search.setOnAction(e -> {
-            System.out.println("\n");
             int id = Validator.getInt(sc, "Customer ID to Retrieve: ");
             System.out.println(cstList.retrieveCustomerById(id));
+            output.appendText("\n\n");
         });
 
         Button update = new Button("Update Entry");
         update.setMaxWidth(Double.MAX_VALUE);
         update.setOnAction(e -> {
-            System.out.println("\n");
             int id = Validator.getInt(sc, "Customer ID to Update: ");
             String firstName = Validator.getLine(sc, "Customer First Name: ");
             String lastName = Validator.getLine(sc, "Customer Last Name: ");
@@ -101,18 +102,19 @@ public class CustomerAppGUI extends Application {
             String purchase = Validator.getLine(sc, "Customer Purchase: ");
             double price = Validator.getDouble(sc, "Customer Price: ");
             cstList.updateCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
+            output.appendText("\n\n");
         });
 
         Button delete = new Button("Delete Entry");
         delete.setMaxWidth(Double.MAX_VALUE);
         delete.setOnAction(e -> {
-            System.out.println("\n");
             int id = Validator.getInt(sc, "Customer ID to Delete: ");
             System.out.println(cstList.retrieveCustomerById(id));
             String ok = Validator.getLine(sc, "Delete this Customer? (y/n): ", "^[yYnN]$");
             if (ok.equalsIgnoreCase("Y")) {
                 cstList.deleteCustomer(id);
             }
+            output.appendText("\n\n");
         });
 
         Button ageGroup = new Button("Customer Age Group");
@@ -121,56 +123,71 @@ public class CustomerAppGUI extends Application {
             int min = Validator.getInt(sc, "Minimum Age: ");
             int max = Validator.getInt(sc, "Maximum Age: ");
             List<Customer> customers = cstList.getAgeGroup(min, max);
+            output.appendText(String.format(("Customers in the age range of %d to %d: %d\n\n"), min, max, customers.size()));
             for (Customer c : customers) {
-                System.out.println(c);
+                output.appendText(c.toString() + "\n");
             }
-            output.appendText(String.format(("\n\nCustomers in the age range of %d to %d: %d"), min, max, customers.size()));
+            output.appendText("\n");
         });
 
         Button ageStats = new Button("Customer Age Range");
         ageStats.setMaxWidth(Double.MAX_VALUE);
         ageStats.setOnAction(e -> {
-            output.appendText("\n\n" + cstList.customerAgeRange());
+            output.appendText(cstList.customerAgeRange());
+            output.appendText("\n\n");
         });
 
         Button totalProfit = new Button("Show Total Profits");
         totalProfit.setMaxWidth(Double.MAX_VALUE);
         totalProfit.setOnAction(e -> {
-            output.appendText("\n\nTotal profit of all purchases: $" + cstList.showTotalProfits());
+            output.appendText("Total profit of all purchases: $" + cstList.showTotalProfits());
+            output.appendText("\n\n");
         });
 
         Button averageProfit = new Button("Show Average Profits");
         averageProfit.setMaxWidth(Double.MAX_VALUE);
         averageProfit.setOnAction(e -> {
-            output.appendText("\n\nAverage profits of all purchases: $" + cstList.showAvgProfits());
+            output.appendText("Average profits of all purchases: $" + cstList.showAvgProfits());
+            output.appendText("\n\n");
         });
 
         Button itemsBought = new Button("Show Items Bought");
         itemsBought.setMaxWidth(Double.MAX_VALUE);
         itemsBought.setOnAction(e -> {
             String item = Validator.getLine(sc, "Item to Search: ");
-            output.appendText("\n\nTotal number of " + item + "'s purchased: " + cstList.showTotalPurchasedItems(item));
+            output.appendText("Total number of " + item + "'s purchased: " + cstList.showTotalPurchasedItems(item));
+            output.appendText("\n\n");
+        });
+
+        Button clear = new Button("Clear Text");
+        clear.setMaxWidth(Double.MAX_VALUE);
+        clear.setOnAction(e -> {
+            output.clear();
+            output.setText("Welcome to the Team-5 Customer Information Application. ");
+            output.appendText("----------------------------------------------------"
+                    + "---------------------------------------------------");
         });
 
         //Add all the buttons to the VBox and set the VBox in the pane.
-        menu.getChildren().addAll(list, create, search, update, delete, ageGroup, ageStats, totalProfit, averageProfit, itemsBought);
+        menu.getChildren().addAll(list, create, search, update, delete, ageGroup, ageStats, totalProfit, averageProfit, itemsBought, clear);
         outer.setLeft(menu);
 
         //Add properties to TextArea to display the console commands.
         output.setWrapText(true);
         output.setEditable(false);
         outer.setCenter(output);
-        
+
+        //Create opening message.
         output.setText("Welcome to the Team-5 Customer Information Application. ");
-        output.appendText("-----------------------------------------"
-                + "-----------------------------------------");
+        output.appendText("----------------------------------------------------"
+                + "---------------------------------------------------");
 
         //Create an HBox for the user's input field and its label.
         HBox user = new HBox();
         user.setAlignment(Pos.CENTER);
         user.setPadding(new Insets(10, 0, 10, 10));
         user.setSpacing(10);
-        
+
         //Create a label to place next to the user text field.
         //I set this so that is would no appear on the actual window. 
         //This is because, once I had set up the spacing so that it looked
@@ -178,18 +195,17 @@ public class CustomerAppGUI extends Application {
         //I didn't want to mess up the spacing, to I just kept this here.
         Label label = new Label("Enter Commands Here: ");
         label.setVisible(false);
-        
+
         //Add properties to TextField to read in user commands.
         input.setPromptText("Enter Your Commands Here.");
         input.setEditable(true);
-        input.setMinWidth(403);
-        
+        input.setMinWidth(504);
+
         //Place the HBox at the bottom of the pane.
         user.getChildren().addAll(label, input);
         outer.setBottom(user);
 
-        //Set the stage and scene and then show it.
-        Scene layout = new Scene(outer, 600, 500);
+        Scene layout = new Scene(outer, 700, 600);
         window.setScene(layout);
         window.show();
     }
