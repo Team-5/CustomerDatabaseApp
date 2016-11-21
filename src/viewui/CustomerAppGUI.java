@@ -121,6 +121,8 @@ public class CustomerAppGUI extends Application {
             creation.getDialogPane().setContent(grid);
 
             ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            creation.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            creation.getDialogPane().lookupButton(ButtonType.OK).setManaged(false);
             creation.getDialogPane().getButtonTypes().add(submit);
 
             creation.setResultConverter(new Callback<ButtonType, Customer>() {
@@ -171,6 +173,8 @@ public class CustomerAppGUI extends Application {
             find.getDialogPane().setContent(grid);
 
             ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            find.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            find.getDialogPane().lookupButton(ButtonType.OK).setManaged(false);
             find.getDialogPane().getButtonTypes().add(submit);
 
             find.setResultConverter(new Callback<ButtonType, Customer>() {
@@ -195,10 +199,10 @@ public class CustomerAppGUI extends Application {
         update.setMaxWidth(Double.MAX_VALUE);
         update.setOnAction(e -> {
             
-            Dialog creation = new TextInputDialog();
-            creation.setTitle("Customer Update Window");
-            creation.setHeaderText("Enter Updated Customer Information.");
-            creation.setResizable(false);
+            Dialog updated = new TextInputDialog();
+            updated.setTitle("Customer Update Window");
+            updated.setHeaderText("Enter Updated Customer Information.");
+            updated.setResizable(false);
 
             Label id = new Label("Customer ID: ");
             Label firstName = new Label("First Name: ");
@@ -231,12 +235,14 @@ public class CustomerAppGUI extends Application {
             grid.add(purchaseInput, 2, 6);
             grid.add(price, 1, 7);
             grid.add(priceInput, 2, 7);
-            creation.getDialogPane().setContent(grid);
+            updated.getDialogPane().setContent(grid);
 
             ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
-            creation.getDialogPane().getButtonTypes().add(submit);
+            updated.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            updated.getDialogPane().lookupButton(ButtonType.OK).setManaged(false);
+            updated.getDialogPane().getButtonTypes().add(submit);
 
-            creation.setResultConverter(new Callback<ButtonType, Customer>() {
+            updated.setResultConverter(new Callback<ButtonType, Customer>() {
                 @Override
                 public Customer call(ButtonType b) {
                     if (b == submit) {
@@ -250,7 +256,7 @@ public class CustomerAppGUI extends Application {
                 }
             });
 
-            Optional<Customer> result = creation.showAndWait();
+            Optional<Customer> result = updated.showAndWait();
 
             if (result.isPresent()) {
                 output.appendText("Customer Entry #" + idInput.getText() + ": "
@@ -281,6 +287,8 @@ public class CustomerAppGUI extends Application {
             deletion.getDialogPane().setContent(grid);
 
             ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            deletion.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            deletion.getDialogPane().lookupButton(ButtonType.OK).setManaged(false);
             deletion.getDialogPane().getButtonTypes().add(submit);
 
             deletion.setResultConverter(new Callback<ButtonType, Customer>() {
@@ -325,6 +333,8 @@ public class CustomerAppGUI extends Application {
             group.getDialogPane().setContent(grid);
 
             ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            group.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            group.getDialogPane().lookupButton(ButtonType.OK).setManaged(false);
             group.getDialogPane().getButtonTypes().add(submit);
 
             group.setResultConverter(new Callback<ButtonType, Customer>() {
@@ -392,13 +402,15 @@ public class CustomerAppGUI extends Application {
             bought.getDialogPane().setContent(grid);
 
             ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            bought.getDialogPane().lookupButton(ButtonType.OK).setVisible(false);
+            bought.getDialogPane().lookupButton(ButtonType.OK).setManaged(false);
             bought.getDialogPane().getButtonTypes().add(submit);
 
             bought.setResultConverter(new Callback<ButtonType, Customer>() {
                 @Override
                 public Customer call(ButtonType b) {
                     if (b == submit) {
-                        output.appendText("Total number of " + itemInput.getText() + "'s purchased: " + cstList.showTotalPurchasedItems(itemInput.getText()));
+                        output.appendText("Total number of " + itemInput.getText() + "(s) purchased: " + cstList.showTotalPurchasedItems(itemInput.getText()));
                         output.appendText("\n\n");
                     }
                     return null;
