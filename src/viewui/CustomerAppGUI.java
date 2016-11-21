@@ -48,21 +48,17 @@ public class CustomerAppGUI extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 
-        // Create the GUI window and configure its properties.
         Stage window = new Stage();
         window.setTitle("Customer Application");
         window.setResizable(false);
 
-        //Create a pane to hold all the elements of the program.
         BorderPane outer = new BorderPane();
         outer.setPadding(new Insets(10, 10, 10, 10));
 
-        //Create a VBox to hold all the program's buttons.
         VBox menu = new VBox();
         menu.setPadding(new Insets(10, 10, 10, 10));
         menu.setSpacing(15);
 
-        //Create the buttons for the program and set their properties.
         Button list = new Button("List All Entries");
         list.setMaxWidth(Double.MAX_VALUE);
         list.setOnAction(e -> {
@@ -145,8 +141,8 @@ public class CustomerAppGUI extends Application {
         search.setMaxWidth(Double.MAX_VALUE);
         search.setOnAction(e -> {
             Dialog find = new TextInputDialog();
-            find.setTitle("Customer Creation Window");
-            find.setHeaderText("Enter New Customer Information.");
+            find.setTitle("Customer Search Window");
+            find.setHeaderText("Enter Customer Information to Search.");
             find.setResizable(false);
 
             Label id = new Label("Enter an ID: ");
@@ -165,6 +161,7 @@ public class CustomerAppGUI extends Application {
                 public Customer call(ButtonType b) {
                     if (b == submit) {
                         Customer cust = cstList.retrieveCustomerById(Integer.parseInt(idSearch.getText()));
+                        output.appendText("Customer Entry With ID of " + Integer.parseInt(idSearch.getText()) + ":\n\n");
                         output.appendText(String.format("%5d : %s, %s, %3d, %s, %s, %7.2f\n\n", cust.getId(), cust.getFirstName(),
                                 cust.getLastName(), cust.getAge(), cust.getState(), cust.getPurchase(), cust.getPrice()));
                     }
@@ -248,26 +245,81 @@ public class CustomerAppGUI extends Application {
         Button delete = new Button("Delete Entry");
         delete.setMaxWidth(Double.MAX_VALUE);
         delete.setOnAction(e -> {
-            int id = Validator.getInt(sc, "Customer ID to Delete: ");
-            System.out.println(cstList.retrieveCustomerById(id));
-            String ok = Validator.getLine(sc, "Delete this Customer? (y/n): ", "^[yYnN]$");
-            if (ok.equalsIgnoreCase("Y")) {
-                cstList.deleteCustomer(id);
-            }
-            output.appendText("\n\n");
+            Dialog deletion = new TextInputDialog();
+            deletion.setTitle("Customer Deletion Window");
+            deletion.setHeaderText("Enter Customer to Delete.");
+            deletion.setResizable(false);
+
+            Label id = new Label("Customer ID: ");
+            TextField idInput = new TextField();
+
+            GridPane grid = new GridPane();
+            grid.add(id, 1, 1);
+            grid.add(idInput, 2, 1);
+            deletion.getDialogPane().setContent(grid);
+
+            ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            deletion.getDialogPane().getButtonTypes().add(submit);
+
+            deletion.setResultConverter(new Callback<ButtonType, Customer>() {
+                @Override
+                public Customer call(ButtonType b) {
+                    if (b == submit) {
+                        Customer cust = cstList.retrieveCustomerById(Integer.parseInt(idInput.getText()));
+                        output.appendText("The Following Customer Entry Was Selected: \n\n");
+                        output.appendText(String.format("%5d : %s, %s, %3d, %s, %s, %7.2f\n\n", cust.getId(), cust.getFirstName(),
+                                cust.getLastName(), cust.getAge(), cust.getState(), cust.getPurchase(), cust.getPrice()));
+                        cstList.deleteCustomer(Integer.parseInt(idInput.getText()));
+                        output.appendText("Customer Successfully Deleted.\n\n");
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Customer> result = deletion.showAndWait();
         });
 
         Button ageGroup = new Button("Customer Age Group");
         ageGroup.setMaxWidth(Double.MAX_VALUE);
         ageGroup.setOnAction(e -> {
-            int min = Validator.getInt(sc, "Minimum Age: ");
-            int max = Validator.getInt(sc, "Maximum Age: ");
-            List<Customer> customers = cstList.getAgeGroup(min, max);
-            output.appendText(String.format(("Customers in the age range of %d to %d: %d\n\n"), min, max, customers.size()));
-            for (Customer c : customers) {
-                output.appendText(c.toString() + "\n");
-            }
-            output.appendText("\n");
+            Dialog group = new TextInputDialog();
+            group.setTitle("Customer Age Group Window");
+            group.setHeaderText("Enter Two Ages to Group Customers.");
+            group.setResizable(false);
+
+            Label low = new Label("Minimum Age: ");
+            Label high = new Label("Maximum Age: ");
+
+            TextField lowInput = new TextField();
+            TextField highInput = new TextField();
+
+            GridPane grid = new GridPane();
+            grid.add(low, 1, 1);
+            grid.add(lowInput, 2, 1);
+            grid.add(high, 1, 2);
+            grid.add(highInput, 2, 2);
+            group.getDialogPane().setContent(grid);
+
+            ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            group.getDialogPane().getButtonTypes().add(submit);
+
+            group.setResultConverter(new Callback<ButtonType, Customer>() {
+                @Override
+                public Customer call(ButtonType b) {
+                    if (b == submit) {
+                        List<Customer> customers = cstList.getAgeGroup(Integer.parseInt(lowInput.getText()), Integer.parseInt(highInput.getText()));
+                        output.appendText(String.format(("Customers in the age range of %d to %d: %d\n\n"),
+                                Integer.parseInt(lowInput.getText()), Integer.parseInt(highInput.getText()), customers.size()));
+                        for (Customer c : customers) {
+                            output.appendText(c.toString() + "\n");
+                        }
+                        output.appendText("\n");
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Customer> result = group.showAndWait();
         });
 
         Button ageStats = new Button("Customer Age Range");
@@ -294,9 +346,34 @@ public class CustomerAppGUI extends Application {
         Button itemsBought = new Button("Show Items Bought");
         itemsBought.setMaxWidth(Double.MAX_VALUE);
         itemsBought.setOnAction(e -> {
-            String item = Validator.getLine(sc, "Item to Search: ");
-            output.appendText("Total number of " + item + "'s purchased: " + cstList.showTotalPurchasedItems(item));
-            output.appendText("\n\n");
+            Dialog bought = new TextInputDialog();
+            bought.setTitle("Item Search Window");
+            bought.setHeaderText("Enter An Item to Search.");
+            bought.setResizable(false);
+
+            Label item = new Label("Enter Item: ");
+            TextField itemInput = new TextField();
+
+            GridPane grid = new GridPane();
+            grid.add(item, 1, 1);
+            grid.add(itemInput, 2, 1);
+            bought.getDialogPane().setContent(grid);
+
+            ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            bought.getDialogPane().getButtonTypes().add(submit);
+
+            bought.setResultConverter(new Callback<ButtonType, Customer>() {
+                @Override
+                public Customer call(ButtonType b) {
+                    if (b == submit) {
+                        output.appendText("Total number of " + itemInput.getText() + "'s purchased: " + cstList.showTotalPurchasedItems(itemInput.getText()));
+                        output.appendText("\n\n");
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Customer> result = bought.showAndWait();
         });
 
         Button clear = new Button("Clear Text");
@@ -308,16 +385,13 @@ public class CustomerAppGUI extends Application {
                     + "---------------------------------------------------\n\n");
         });
 
-        //Add all the buttons to the VBox and set the VBox in the pane.
         menu.getChildren().addAll(list, create, search, update, delete, ageGroup, ageStats, totalProfit, averageProfit, itemsBought, clear);
         outer.setLeft(menu);
 
-        //Add properties to TextArea to display the console commands.
         output.setWrapText(true);
         output.setEditable(false);
         outer.setCenter(output);
 
-        //Create opening message.
         output.setText("Welcome to the Team-5 Customer Information Application. ");
         output.appendText("----------------------------------------------------"
                 + "---------------------------------------------------\n\n");
