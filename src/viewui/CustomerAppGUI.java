@@ -5,9 +5,9 @@ import java.util.Optional;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -17,20 +17,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import model.Customer;
 import model.ICustomerDAO;
 import model.datastore.mysql.CustomerDAO;
-import util.Validator;
 
 /**
- * The "CustomerAppGUI" class functions the same as the "CustomerApp" class,
+ * The 'CustomerAppGUI' class functions the same as the 'CustomerApp' class,
  * however, it adds a GUI (Graphical User Interface) into the program so that it
  * no longer runs on console-based input and output. This program has buttons
- * for each of the menu items implemented in the "CustomerApp" class, a TextArea
+ * for each of the menu items implemented in the 'CustomerApp' class, a TextArea
  * to display commands, and a TextField to read input from the user.
  *
  * @author Jason Whiting
@@ -45,6 +43,13 @@ public class CustomerAppGUI extends Application {
         launch(args);
     }
 
+    /**
+     * This method will create a GUI window for the 'CustomerApp' class. This
+     * provides options for all the menu items and displays them on a text area.
+     * 
+     * @param stage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -59,17 +64,24 @@ public class CustomerAppGUI extends Application {
         menu.setPadding(new Insets(10, 10, 10, 10));
         menu.setSpacing(15);
 
+        //This is the button for displaying all the Customer entries in the
+        //database. This is option number 1 in the 'CustomerApp' class.
         Button list = new Button("List All Entries");
         list.setMaxWidth(Double.MAX_VALUE);
         list.setOnAction(e -> {
+            
             output.appendText("All Customer Entries:\n\n");
             output.appendText(cstList.toString());
             output.appendText("\n");
+            
         });
 
+        //This is the button for creating a new Customer entry. This is option
+        //number 2 in the 'CustomerApp' class.
         Button create = new Button("Create New Entry");
         create.setMaxWidth(Double.MAX_VALUE);
         create.setOnAction(e -> {
+            
             Dialog creation = new TextInputDialog();
             creation.setTitle("Customer Creation Window");
             creation.setHeaderText("Enter New Customer Information.");
@@ -135,11 +147,16 @@ public class CustomerAppGUI extends Application {
                         + priceInput.getText() + ".\n\n");
                 output.appendText("Entry Successfully Created.\n\n");
             }
+            
         });
 
+        //This is the button that will search all the entries in the database
+        //for a single customer whose ID matches the user's input. This is 
+        //option number 3 in the 'CustomerApp' class.
         Button search = new Button("Search For Entry");
         search.setMaxWidth(Double.MAX_VALUE);
         search.setOnAction(e -> {
+            
             Dialog find = new TextInputDialog();
             find.setTitle("Customer Search Window");
             find.setHeaderText("Enter Customer Information to Search.");
@@ -164,17 +181,20 @@ public class CustomerAppGUI extends Application {
                         output.appendText("Customer Entry With ID of " + Integer.parseInt(idSearch.getText()) + ":\n\n");
                         output.appendText(String.format("%5d : %s, %s, %3d, %s, %s, %7.2f\n\n", cust.getId(), cust.getFirstName(),
                                 cust.getLastName(), cust.getAge(), cust.getState(), cust.getPurchase(), cust.getPrice()));
+                        return cust;
                     }
                     return null;
                 }
             });
 
             Optional<Customer> result = find.showAndWait();
+
         });
 
         Button update = new Button("Update Entry");
         update.setMaxWidth(Double.MAX_VALUE);
         update.setOnAction(e -> {
+            
             Dialog creation = new TextInputDialog();
             creation.setTitle("Customer Update Window");
             creation.setHeaderText("Enter Updated Customer Information.");
@@ -240,11 +260,13 @@ public class CustomerAppGUI extends Application {
                         + priceInput.getText() + ".\n\n");
                 output.appendText("Entry Successfully Updated.\n\n");
             }
+            
         });
 
         Button delete = new Button("Delete Entry");
         delete.setMaxWidth(Double.MAX_VALUE);
         delete.setOnAction(e -> {
+            
             Dialog deletion = new TextInputDialog();
             deletion.setTitle("Customer Deletion Window");
             deletion.setHeaderText("Enter Customer to Delete.");
@@ -277,11 +299,13 @@ public class CustomerAppGUI extends Application {
             });
 
             Optional<Customer> result = deletion.showAndWait();
+            
         });
 
         Button ageGroup = new Button("Customer Age Group");
         ageGroup.setMaxWidth(Double.MAX_VALUE);
         ageGroup.setOnAction(e -> {
+            
             Dialog group = new TextInputDialog();
             group.setTitle("Customer Age Group Window");
             group.setHeaderText("Enter Two Ages to Group Customers.");
@@ -320,32 +344,40 @@ public class CustomerAppGUI extends Application {
             });
 
             Optional<Customer> result = group.showAndWait();
+            
         });
 
         Button ageStats = new Button("Customer Age Range");
         ageStats.setMaxWidth(Double.MAX_VALUE);
         ageStats.setOnAction(e -> {
+            
             output.appendText(cstList.customerAgeRange());
             output.appendText("\n\n");
+            
         });
 
         Button totalProfit = new Button("Show Total Profits");
         totalProfit.setMaxWidth(Double.MAX_VALUE);
         totalProfit.setOnAction(e -> {
+            
             output.appendText("Total profit of all purchases: $" + cstList.showTotalProfits());
             output.appendText("\n\n");
+            
         });
 
         Button averageProfit = new Button("Show Average Profits");
         averageProfit.setMaxWidth(Double.MAX_VALUE);
         averageProfit.setOnAction(e -> {
+            
             output.appendText("Average profits of all purchases: $" + cstList.showAvgProfits());
             output.appendText("\n\n");
+            
         });
 
         Button itemsBought = new Button("Show Items Bought");
         itemsBought.setMaxWidth(Double.MAX_VALUE);
         itemsBought.setOnAction(e -> {
+            
             Dialog bought = new TextInputDialog();
             bought.setTitle("Item Search Window");
             bought.setHeaderText("Enter An Item to Search.");
@@ -374,15 +406,18 @@ public class CustomerAppGUI extends Application {
             });
 
             Optional<Customer> result = bought.showAndWait();
+            
         });
 
         Button clear = new Button("Clear Text");
         clear.setMaxWidth(Double.MAX_VALUE);
         clear.setOnAction(e -> {
+            
             output.clear();
             output.setText("Welcome to the Team-5 Customer Information Application. ");
             output.appendText("----------------------------------------------------"
                     + "---------------------------------------------------\n\n");
+            
         });
 
         menu.getChildren().addAll(list, create, search, update, delete, ageGroup, ageStats, totalProfit, averageProfit, itemsBought, clear);
