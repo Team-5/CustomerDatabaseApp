@@ -1,19 +1,26 @@
 package viewui;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import model.Customer;
 import model.ICustomerDAO;
 import model.datastore.mysql.CustomerDAO;
@@ -33,7 +40,6 @@ public class CustomerAppGUI extends Application {
     ICustomerDAO cstList = new CustomerDAO();
     Scanner sc = new Scanner(System.in);
     protected TextArea output = new TextArea();
-    protected TextField input = new TextField();
 
     public static void main(String[] args) {
         launch(args);
@@ -68,41 +74,175 @@ public class CustomerAppGUI extends Application {
         Button create = new Button("Create New Entry");
         create.setMaxWidth(Double.MAX_VALUE);
         create.setOnAction(e -> {
-            System.out.println("\n");
-            int id = Validator.getInt(sc, "New Customer ID: ");
-            String firstName = Validator.getLine(sc, "New Customer First Name: ");
-            String lastName = Validator.getLine(sc, "New Customer Last Name: ");
-            int age = Validator.getInt(sc, "New Customer Age: ");
-            String state = Validator.getLine(sc, "New Customer State: ");
-            String purchase = Validator.getLine(sc, "New Customer Purchase: ");
-            double price = Validator.getDouble(sc, "New Customer Payment Amount: ");
-            cstList.createCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
-            output.appendText("Customer Entry #" + id + ": " + firstName + " " + lastName + ", " + age + ", " + state + ". ");
-            output.appendText("Purchased a " + purchase + " for $" + price + ". ");
-            output.appendText("Entry Successfully Created.");
-            output.appendText("\n\n");
+            Dialog creation = new TextInputDialog();
+            creation.setTitle("Customer Creation Window");
+            creation.setHeaderText("Enter New Customer Information.");
+            creation.setResizable(false);
+
+            Label id = new Label("Customer ID: ");
+            Label firstName = new Label("First Name: ");
+            Label lastName = new Label("Last Name: ");
+            Label age = new Label("Age: ");
+            Label state = new Label("Home State: ");
+            Label purchase = new Label("Purchase: ");
+            Label price = new Label("Purchase Price: ");
+
+            TextField idInput = new TextField();
+            TextField firstNameInput = new TextField();
+            TextField lastNameInput = new TextField();
+            TextField ageInput = new TextField();
+            TextField stateInput = new TextField();
+            TextField purchaseInput = new TextField();
+            TextField priceInput = new TextField();
+
+            GridPane grid = new GridPane();
+            grid.add(id, 1, 1);
+            grid.add(idInput, 2, 1);
+            grid.add(firstName, 1, 2);
+            grid.add(firstNameInput, 2, 2);
+            grid.add(lastName, 1, 3);
+            grid.add(lastNameInput, 2, 3);
+            grid.add(age, 1, 4);
+            grid.add(ageInput, 2, 4);
+            grid.add(state, 1, 5);
+            grid.add(stateInput, 2, 5);
+            grid.add(purchase, 1, 6);
+            grid.add(purchaseInput, 2, 6);
+            grid.add(price, 1, 7);
+            grid.add(priceInput, 2, 7);
+            creation.getDialogPane().setContent(grid);
+
+            ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            creation.getDialogPane().getButtonTypes().add(submit);
+
+            creation.setResultConverter(new Callback<ButtonType, Customer>() {
+                @Override
+                public Customer call(ButtonType b) {
+                    if (b == submit) {
+                        Customer cust = new Customer(Integer.parseInt(idInput.getText()), firstNameInput.getText(),
+                                lastNameInput.getText(), Integer.parseInt(ageInput.getText()), stateInput.getText(),
+                                purchaseInput.getText(), Double.parseDouble(priceInput.getText()));
+                        cstList.createCustomer(cust);
+                        return cust;
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Customer> result = creation.showAndWait();
+
+            if (result.isPresent()) {
+                output.appendText("Customer Entry #" + idInput.getText() + ": "
+                        + firstNameInput.getText() + " " + lastNameInput.getText() + ", " + ageInput.getText()
+                        + ", " + stateInput.getText() + ".\n");
+                output.appendText("Purchased a " + purchaseInput.getText() + " for $"
+                        + priceInput.getText() + ".\n\n");
+                output.appendText("Entry Successfully Created.\n\n");
+            }
         });
 
         Button search = new Button("Search For Entry");
         search.setMaxWidth(Double.MAX_VALUE);
         search.setOnAction(e -> {
-            int id = Validator.getInt(sc, "Customer ID to Retrieve: ");
-            System.out.println(cstList.retrieveCustomerById(id));
-            output.appendText("\n\n");
+            Dialog find = new TextInputDialog();
+            find.setTitle("Customer Creation Window");
+            find.setHeaderText("Enter New Customer Information.");
+            find.setResizable(false);
+
+            Label id = new Label("Enter an ID: ");
+            TextField idSearch = new TextField();
+
+            GridPane grid = new GridPane();
+            grid.add(id, 1, 1);
+            grid.add(idSearch, 2, 1);
+            find.getDialogPane().setContent(grid);
+
+            ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            find.getDialogPane().getButtonTypes().add(submit);
+
+            find.setResultConverter(new Callback<ButtonType, Customer>() {
+                @Override
+                public Customer call(ButtonType b) {
+                    if (b == submit) {
+                        Customer cust = cstList.retrieveCustomerById(Integer.parseInt(idSearch.getText()));
+                        output.appendText(String.format("%5d : %s, %s, %3d, %s, %s, %7.2f\n\n", cust.getId(), cust.getFirstName(),
+                                cust.getLastName(), cust.getAge(), cust.getState(), cust.getPurchase(), cust.getPrice()));
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Customer> result = find.showAndWait();
         });
 
         Button update = new Button("Update Entry");
         update.setMaxWidth(Double.MAX_VALUE);
         update.setOnAction(e -> {
-            int id = Validator.getInt(sc, "Customer ID to Update: ");
-            String firstName = Validator.getLine(sc, "Customer First Name: ");
-            String lastName = Validator.getLine(sc, "Customer Last Name: ");
-            int age = Validator.getInt(sc, "Customer Age: ");
-            String state = Validator.getLine(sc, "Customer State: ");
-            String purchase = Validator.getLine(sc, "Customer Purchase: ");
-            double price = Validator.getDouble(sc, "Customer Price: ");
-            cstList.updateCustomer(new Customer(id, firstName, lastName, age, state, purchase, price));
-            output.appendText("\n\n");
+            Dialog creation = new TextInputDialog();
+            creation.setTitle("Customer Update Window");
+            creation.setHeaderText("Enter Updated Customer Information.");
+            creation.setResizable(false);
+
+            Label id = new Label("Customer ID: ");
+            Label firstName = new Label("First Name: ");
+            Label lastName = new Label("Last Name: ");
+            Label age = new Label("Age: ");
+            Label state = new Label("Home State: ");
+            Label purchase = new Label("Purchase: ");
+            Label price = new Label("Purchase Price: ");
+
+            TextField idInput = new TextField();
+            TextField firstNameInput = new TextField();
+            TextField lastNameInput = new TextField();
+            TextField ageInput = new TextField();
+            TextField stateInput = new TextField();
+            TextField purchaseInput = new TextField();
+            TextField priceInput = new TextField();
+
+            GridPane grid = new GridPane();
+            grid.add(id, 1, 1);
+            grid.add(idInput, 2, 1);
+            grid.add(firstName, 1, 2);
+            grid.add(firstNameInput, 2, 2);
+            grid.add(lastName, 1, 3);
+            grid.add(lastNameInput, 2, 3);
+            grid.add(age, 1, 4);
+            grid.add(ageInput, 2, 4);
+            grid.add(state, 1, 5);
+            grid.add(stateInput, 2, 5);
+            grid.add(purchase, 1, 6);
+            grid.add(purchaseInput, 2, 6);
+            grid.add(price, 1, 7);
+            grid.add(priceInput, 2, 7);
+            creation.getDialogPane().setContent(grid);
+
+            ButtonType submit = new ButtonType("Submit", ButtonData.OK_DONE);
+            creation.getDialogPane().getButtonTypes().add(submit);
+
+            creation.setResultConverter(new Callback<ButtonType, Customer>() {
+                @Override
+                public Customer call(ButtonType b) {
+                    if (b == submit) {
+                        Customer cust = new Customer(Integer.parseInt(idInput.getText()), firstNameInput.getText(),
+                                lastNameInput.getText(), Integer.parseInt(ageInput.getText()), stateInput.getText(),
+                                purchaseInput.getText(), Double.parseDouble(priceInput.getText()));
+                        cstList.updateCustomer(cust);
+                        return cust;
+                    }
+                    return null;
+                }
+            });
+
+            Optional<Customer> result = creation.showAndWait();
+
+            if (result.isPresent()) {
+                output.appendText("Customer Entry #" + idInput.getText() + ": "
+                        + firstNameInput.getText() + " " + lastNameInput.getText() + ", " + ageInput.getText()
+                        + ", " + stateInput.getText() + ".\n");
+                output.appendText("Purchased a " + purchaseInput.getText() + " for $"
+                        + priceInput.getText() + ".\n\n");
+                output.appendText("Entry Successfully Updated.\n\n");
+            }
         });
 
         Button delete = new Button("Delete Entry");
@@ -165,7 +305,7 @@ public class CustomerAppGUI extends Application {
             output.clear();
             output.setText("Welcome to the Team-5 Customer Information Application. ");
             output.appendText("----------------------------------------------------"
-                    + "---------------------------------------------------");
+                    + "---------------------------------------------------\n\n");
         });
 
         //Add all the buttons to the VBox and set the VBox in the pane.
@@ -180,30 +320,7 @@ public class CustomerAppGUI extends Application {
         //Create opening message.
         output.setText("Welcome to the Team-5 Customer Information Application. ");
         output.appendText("----------------------------------------------------"
-                + "---------------------------------------------------");
-
-        //Create an HBox for the user's input field and its label.
-        HBox user = new HBox();
-        user.setAlignment(Pos.CENTER);
-        user.setPadding(new Insets(10, 0, 10, 10));
-        user.setSpacing(10);
-
-        //Create a label to place next to the user text field.
-        //I set this so that is would no appear on the actual window. 
-        //This is because, once I had set up the spacing so that it looked
-        //nice, I added this prompt to the text field itself.
-        //I didn't want to mess up the spacing, to I just kept this here.
-        Label label = new Label("Enter Commands Here: ");
-        label.setVisible(false);
-
-        //Add properties to TextField to read in user commands.
-        input.setPromptText("Enter Your Commands Here.");
-        input.setEditable(true);
-        input.setMinWidth(504);
-
-        //Place the HBox at the bottom of the pane.
-        user.getChildren().addAll(label, input);
-        outer.setBottom(user);
+                + "---------------------------------------------------\n\n");
 
         Scene layout = new Scene(outer, 700, 600);
         window.setScene(layout);
