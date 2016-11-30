@@ -8,7 +8,7 @@ import java.util.Scanner;
  * part on Murach's Java SE 6 by Joel Murach, et. al.
  *
  * @author Jason Whiting
- * @version 2016-11-10
+ * @version 2016-11-30
  */
 public class Validator {
 

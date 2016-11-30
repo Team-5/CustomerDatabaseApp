@@ -16,7 +16,7 @@ import model.ICustomerDAO;
  *
  * @authors Jason Whiting, Lisa Caswell, Willie Scott, Jeremy Wiles, and Lucas
  * Johns
- * @version 2016-11-10
+ * @version 2016-11-30
  */
 public class CustomerDAO implements ICustomerDAO {
 

@@ -4,16 +4,18 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
- *
+ * The JUnit tests for the "CustomerDatabaseApp" program.
+ * Currently only consists of the basic JUnit tests.
+ * 
  * @authors Lucas Johns and Jason Whiting
- * @version 2016-11-10
+ * @version 2016-11-30
  */
 public class CustomerTest {
     
     Customer instance = new Customer(1, "Jason", "Whiting", 19, "Pennsylvania", "Playstation 4", 249.99);
     
     /**
-     * Test of getId method, of class Customer.
+     * Test of the "Customer" class getId method.
      */
     @Test
     public void testGetId() {
@@ -24,7 +26,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of setId method, of class Customer.
+     * Test of the "Customer" class setId method.
      */
     @Test
     public void testSetId() {
@@ -34,7 +36,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of getFirstName method, of class Customer.
+     * Test of the "Customer" class getFirstName method.
      */
     @Test
     public void testGetFirstName() {
@@ -45,7 +47,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of getLastName method, of class Customer.
+     * Test of the "Customer" class getLastName method.
      */
     @Test
     public void testGetLastName() {
@@ -56,7 +58,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of getAge method, of class Customer.
+     * Test of the "Customer" class getAge method.
      */
     @Test
     public void testGetAge() {
@@ -67,7 +69,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of getState method, of class Customer.
+     *Test of the "Customer" class getState method.
      */
     @Test
     public void testGetState() {
@@ -78,7 +80,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of getPurchase method, of class Customer.
+     * Test of the "Customer" class getPurchase method.
      */
     @Test
     public void testGetPurchase() {
@@ -89,7 +91,7 @@ public class CustomerTest {
     }
 
     /**
-     * Test of getPrice method, of class Customer.
+     * Test of the "Customer" class getPrice method.
      */
     @Test
     public void testGetPrice() {

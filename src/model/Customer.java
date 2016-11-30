@@ -8,7 +8,7 @@ package model;
  * people buying most?
  *
  * @authors Lisa Caswell and Jason Whiting
- * @version 2016-11-10
+ * @version 2016-11-30
  */
 public class Customer {
 

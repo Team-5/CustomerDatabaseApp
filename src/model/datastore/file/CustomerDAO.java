@@ -11,7 +11,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
 import model.Customer;
@@ -20,9 +19,11 @@ import model.ICustomerDAO;
 /**
  * CustomerDAO (Data Access Object) handles all the interactions with the data
  * store. This version uses a file to store the data. It is not multi-user safe.
+ * This file is also not up-to-date with implementation as it was not a part of
+ * the assignment.
  *
  * @author Jason Whiting
- * @version 2016-10-20
+ * @version 2016-11-30
  */
 public class CustomerDAO implements ICustomerDAO {
 

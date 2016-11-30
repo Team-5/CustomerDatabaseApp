@@ -32,6 +32,7 @@ import model.datastore.mysql.CustomerDAO;
  * to display commands, and a TextField to read input from the user.
  *
  * @author Jason Whiting
+ * @version 2016-11-30
  */
 public class CustomerAppGUI extends Application {
 
@@ -64,8 +65,6 @@ public class CustomerAppGUI extends Application {
         menu.setPadding(new Insets(10, 10, 10, 10));
         menu.setSpacing(15);
 
-        //This is the button for displaying all the Customer entries in the
-        //database. This is option number 1 in the 'CustomerApp' class.
         Button list = new Button("List All Entries");
         list.setMaxWidth(Double.MAX_VALUE);
         list.setOnAction(e -> {
@@ -76,8 +75,6 @@ public class CustomerAppGUI extends Application {
             
         });
 
-        //This is the button for creating a new Customer entry. This is option
-        //number 2 in the 'CustomerApp' class.
         Button create = new Button("Create New Entry");
         create.setMaxWidth(Double.MAX_VALUE);
         create.setOnAction(e -> {
@@ -152,9 +149,6 @@ public class CustomerAppGUI extends Application {
             
         });
 
-        //This is the button that will search all the entries in the database
-        //for a single customer whose ID matches the user's input. This is 
-        //option number 3 in the 'CustomerApp' class.
         Button search = new Button("Search For Entry");
         search.setMaxWidth(Double.MAX_VALUE);
         search.setOnAction(e -> {

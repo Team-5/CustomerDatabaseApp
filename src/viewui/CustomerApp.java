@@ -16,7 +16,7 @@ import util.Validator;
  *
  * @authors Lisa Caswell, Jason Whiting, Willie Scott, Jeremy Wiles, and Lucas
  * Johns
- * @version 2016-11-10
+ * @version 2016-11-30
  */
 public class CustomerApp {
 

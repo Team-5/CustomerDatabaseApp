@@ -12,10 +12,15 @@ import java.util.Properties;
  * based on code taken from Professor John Phillip's program.
  *
  * @author Jason Whiting
- * @version 2016-11-10
+ * @version 2016-11-30
  */
 public class DBConnection {
 
+    /**
+     * Gets a connection to the database.
+     * 
+     * @return 
+     */
     public static Connection getConnection() {
 
         Properties props = new Properties();
