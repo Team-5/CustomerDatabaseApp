@@ -45,6 +45,16 @@ public class CustomerTest {
         String result = instance.getFirstName();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of the "Customer" class setFirstName method.
+     */
+    @Test
+    public void testSetFirstName() {
+        System.out.println("setFirstName");
+        String name = "";
+        instance.setFirstName(name);
+    }
 
     /**
      * Test of the "Customer" class getLastName method.
@@ -55,6 +65,16 @@ public class CustomerTest {
         String expResult = "Whiting";
         String result = instance.getLastName();
         assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of the "Customer" class setLastName method.
+     */
+    @Test
+    public void testSetLastName() {
+        System.out.println("setLastName");
+        String name = "";
+        instance.setLastName(name);
     }
 
     /**
@@ -67,6 +87,16 @@ public class CustomerTest {
         int result = instance.getAge();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of the "Customer" class setAge method.
+     */
+    @Test
+    public void testSetAge() {
+        System.out.println("setAge");
+        int age = 0;
+        instance.setAge(age);
+    }
 
     /**
      *Test of the "Customer" class getState method.
@@ -78,6 +108,16 @@ public class CustomerTest {
         String result = instance.getState();
         assertEquals(expResult, result);
     }
+    
+    /**
+     * Test of the "Customer" class setState method.
+     */
+    @Test
+    public void testSetState() {
+        System.out.println("setState");
+        String state = "";
+        instance.setState(state);
+    }
 
     /**
      * Test of the "Customer" class getPurchase method.
@@ -88,6 +128,16 @@ public class CustomerTest {
         String expResult = "Playstation 4";
         String result = instance.getPurchase();
         assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of the "Customer" class setPurchase method.
+     */
+    @Test
+    public void testSetPurchase() {
+        System.out.println("setPurchase");
+        String purchase = "";
+        instance.setPurchase(purchase);
     }
 
     /**
@@ -101,4 +151,14 @@ public class CustomerTest {
         double result = instance.getPrice();
         assertEquals(expResult, result, 0.0);
     } 
+    
+    /**
+     * Test of the "Customer" class setPrice method.
+     */
+    @Test
+    public void testSetPrice() {
+        System.out.println("setPrice");
+        double price = 0.0;
+        instance.setPrice(price);
+    }
 }
