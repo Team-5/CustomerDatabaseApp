@@ -23,6 +23,9 @@ public class CustomerApp {
     ICustomerDAO cstList = new CustomerDAO();
     Scanner sc = new Scanner(System.in);
 
+    /**
+     * Calls the "menuLoop" method which contains most of the class's code.
+     */
     public CustomerApp() {
         menuLoop();
     }
