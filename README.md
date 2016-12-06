@@ -12,4 +12,4 @@ a graphical user interface that the team created as an extra credit feature. All
 The program also has basic JUnit tests for all of its getter and setter methods. Our team did not create more complex JUnit tests as
 we were more focused on getting the GUI to work properly.
 
-We also wrote detailed JavaDoc comments for all the program's methods, or at least all of the ones that might have needed explaination.
+We also wrote detailed JavaDoc comments for all the program's methods, or at least all of the ones that might have needed explaination. Here is a link to the JavaDocs webpage: <a link = https://team-5.github.io/CustomerDatabaseApp/>JavaDoc Comments</a>.
